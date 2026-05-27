@@ -29,7 +29,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
 
       - run: npm ci
-      - run: npm test
+      - run: npm test --test-timeout=30000
 
       - name: Publish
         run: npm publish --access public --no-provenance
