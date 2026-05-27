@@ -31,7 +31,7 @@
   "homepage": "https://kxco.ai",
   "repository": {
     "type": "git",
-    "url": "https://github.com/JackKXCO/kxco-pq-chain.git"
+    "url": "git+https://github.com/JackKXCO/kxco-pq-chain.git"
   },
   "bugs": {
     "url": "https://github.com/JackKXCO/kxco-pq-chain/issues"
