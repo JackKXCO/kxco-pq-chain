@@ -121,6 +121,40 @@ export class KxcoChain {
     })
   }
 
+  /**
+   * Register an AI agent or robot identity on-chain. Called by the sponsoring institution.
+   * @param {object} opts
+   * @param {string} opts.agentKid           — 16-hex-char kid of the agent
+   * @param {string} opts.agentPublicKeyHex  — hex-encoded agent ML-DSA-65 public key
+   * @param {string} opts.agentType          — 'llm' | 'robot' | 'iot' | 'process'
+   * @param {string} opts.scopeHash          — hex SHA-256 of the canonical scope JSON
+   * @param {number} opts.expiresAt          — unix seconds (mandatory, must be > 0)
+   * @returns {Promise<{txHash: string, blockNumber: number}>}
+   */
+  async issueAgentCredential({ agentKid, agentPublicKeyHex, agentType, scopeHash, expiresAt }) {
+    return this.#send('issueAgentCredential', {
+      agentKid,
+      agentPublicKeyHex,
+      agentType,
+      scopeHash,
+      expiresAt,
+    })
+  }
+
+  /**
+   * Revoke an agent credential on-chain. The chain identity must be the sponsoring institution.
+   * @param {object} opts
+   * @param {string} opts.agentKid  — kid of the agent to revoke
+   * @param {string} [opts.reason]  — human-readable revocation reason
+   * @returns {Promise<{txHash: string, blockNumber: number}>}
+   */
+  async revokeAgentCredential({ agentKid, reason = '' }) {
+    return this.#send('revokeAgentCredential', {
+      agentKid,
+      reason,
+    })
+  }
+
   // ─── internal ────────────────────────────────────────────────────────────
 
   async #send(operation, payload) {

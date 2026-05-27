@@ -67,11 +67,26 @@ export interface RotateKeyOpts {
 export class KxcoChain {
   constructor(opts: KxcoChainOptions)
   registerInstitution(opts: RegisterInstitutionOpts): Promise<RelayResult>
-  issueCredential(opts: IssueCredentialOpts):         Promise<RelayResult>
-  revokeCredential(opts: RevokeCredentialOpts):       Promise<RelayResult>
-  anchorAuditRoot(opts: AnchorAuditRootOpts):         Promise<RelayResult>
-  anchorAttestation(opts: AnchorAttestationOpts):     Promise<RelayResult>
-  rotateKey(opts: RotateKeyOpts):                     Promise<RelayResult>
+  issueCredential(opts: IssueCredentialOpts):               Promise<RelayResult>
+  revokeCredential(opts: RevokeCredentialOpts):             Promise<RelayResult>
+  anchorAuditRoot(opts: AnchorAuditRootOpts):               Promise<RelayResult>
+  anchorAttestation(opts: AnchorAttestationOpts):           Promise<RelayResult>
+  rotateKey(opts: RotateKeyOpts):                           Promise<RelayResult>
+  issueAgentCredential(opts: IssueAgentCredentialOpts):     Promise<RelayResult>
+  revokeAgentCredential(opts: RevokeAgentCredentialOpts):   Promise<RelayResult>
+}
+
+export interface IssueAgentCredentialOpts {
+  agentKid:          string
+  agentPublicKeyHex: string
+  agentType:         'llm' | 'robot' | 'iot' | 'process'
+  scopeHash:         string
+  expiresAt:         number
+}
+
+export interface RevokeAgentCredentialOpts {
+  agentKid: string
+  reason?:  string
 }
 
 // ── Low-level helpers ─────────────────────────────────────────────────────────
