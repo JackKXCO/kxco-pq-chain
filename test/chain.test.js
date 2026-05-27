@@ -167,6 +167,43 @@ test('rotateKey: sends correct intent', async () => {
   assert.equal(lastRequest.payload.newKid, newKid)
 })
 
+// ── issueAgentCredential ──────────────────────────────────────────────────────
+
+test('issueAgentCredential: sends correct intent', async () => {
+  const chain     = makeChain()
+  const agentKey  = mlDsa.ml_dsa65.keygen()
+  const agentKid  = fingerprint(agentKey.publicKey).slice(0, 16)
+  const pubHex    = Buffer.from(agentKey.publicKey).toString('hex')
+  const scopeHash = 'c'.repeat(64)
+
+  const result = await chain.issueAgentCredential({
+    agentKid,
+    agentPublicKeyHex: pubHex,
+    agentType: 'llm',
+    scopeHash,
+    expiresAt: 1900000000,
+  })
+
+  assert.equal(result.txHash, '0xdeadbeef')
+  assert.equal(lastRequest.operation, 'issueAgentCredential')
+  assert.equal(lastRequest.payload.agentKid, agentKid)
+  assert.equal(lastRequest.payload.agentType, 'llm')
+  assert.equal(lastRequest.payload.scopeHash, scopeHash)
+  assert.equal(lastRequest.payload.expiresAt, 1900000000)
+})
+
+// ── revokeAgentCredential ─────────────────────────────────────────────────────
+
+test('revokeAgentCredential: sends correct intent', async () => {
+  const chain  = makeChain()
+  const result = await chain.revokeAgentCredential({ agentKid: 'aabbccddeeff0022', reason: 'decommissioned' })
+
+  assert.equal(result.txHash, '0xdeadbeef')
+  assert.equal(lastRequest.operation, 'revokeAgentCredential')
+  assert.equal(lastRequest.payload.agentKid, 'aabbccddeeff0022')
+  assert.equal(lastRequest.payload.reason, 'decommissioned')
+})
+
 // ── signature verification ────────────────────────────────────────────────────
 
 test('intent signature is a valid ML-DSA-65 signature over the canonical message', async () => {

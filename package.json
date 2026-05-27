@@ -1,6 +1,6 @@
 {
   "name": "kxco-pq-chain",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "HTTP client for the KXCO meta-transaction relay. Institutions sign ML-DSA-65 intents; KXCO pays gas and submits EVM transactions on Armature L1.",
   "keywords": [
     "post-quantum",
