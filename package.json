@@ -1,0 +1,66 @@
+{
+  "name": "kxco-pq-chain",
+  "version": "1.0.0",
+  "description": "HTTP client for the KXCO meta-transaction relay. Institutions sign ML-DSA-65 intents; KXCO pays gas and submits EVM transactions on Armature L1.",
+  "keywords": [
+    "post-quantum",
+    "pqc",
+    "ml-dsa",
+    "nist",
+    "fips-204",
+    "blockchain",
+    "meta-transaction",
+    "relay",
+    "kxco",
+    "armature",
+    "identity-registry",
+    "credential",
+    "audit-anchor",
+    "attestation"
+  ],
+  "license": "Apache-2.0",
+  "author": "KXCO by Knightsbridge <hello@kxco.ai>",
+  "contributors": [
+    {
+      "name": "Shayne Heffernan"
+    },
+    {
+      "name": "John Heffernan"
+    }
+  ],
+  "homepage": "https://kxco.ai",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JackKXCO/kxco-pq-chain.git"
+  },
+  "bugs": {
+    "url": "https://github.com/JackKXCO/kxco-pq-chain/issues"
+  },
+  "type": "module",
+  "sideEffects": false,
+  "main": "./src/index.js",
+  "types": "./src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./src/index.js"
+    }
+  },
+  "files": [
+    "src",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20.19"
+  },
+  "dependencies": {
+    "kxco-post-quantum": "^1.1.6"
+  },
+  "scripts": {
+    "test": "node --test --test-timeout=30000 test/chain.test.js"
+  },
+  "funding": "https://kxco.ai",
+  "publishConfig": {
+    "access": "public"
+  }
+}
